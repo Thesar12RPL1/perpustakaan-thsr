@@ -4,14 +4,14 @@
         <center><h2>Form Edit Data Anggota</h2></center>
         <!-- Proses query untuk menampilkan data yang mau di edit -->
         <?php
-            $id = $_GET['id'];
+            $id_petugas = $_GET['id_idpetugas'];
             $query = mysqli_query($konek,"SELECT * FROM anggota WHERE id_anggota = '$id'");
             foreach ($query as $row) {
         ?>
         <!-- -------------------------------------------------- -->
         <form action="?page=anggota-edit-proses" method="POST">
             <!-- tambahkan input hidden untuk menyisipkan id anggota yg mau diedit, dibutuhkan pada saat edit proses query -->
-            <input value="<?php echo $row['id_anggota'] ?>" class="form-control" type="hidden" name="id">
+            <input value="<?php echo $row['id_anggota'] ?>" class="form-control" type="hidden" name="id_petugas">
             <!-- --------------------------------------------------------------------------------------------------------- -->
             <div class="form-group">
                 <label for="">NIS</label>

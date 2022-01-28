@@ -20,21 +20,32 @@
                     include "koneksi.php";
                     if (isset($_POST['login'])) {
                         $username = $_POST["username"];
-                        $password = $_POST["password"];
-                        $queryCheck = mysqli_query($konek,"SELECT * FROM petugas WHERE username = '$username' AND password = '$password'");
+                        $password = $_POST["password"]; 
+                        $queryCheck = mysqli_query($konek,"SELECT * FROM petugas WHERE username = '$username'");
                         $check = mysqli_num_rows($queryCheck);
-                        echo $check;
-
+                        
                         if ($check === 1) {
-                            session_start();
-                            $_SESSION['jabatan'] = "petugas";
-                            ?>
-                            <script>
-                                alert('Anda Berhasil Login');
-                                window.location.href='dashboard.php';
-                            </script>
-                            <?php                    
-                        }else{
+                            foreach($queryCheck as $row){
+                                $nama    = $row['nama'];
+                                $jabatan = $row['jabatan'];
+                                $password_enkript = $row['password'];
+
+                            }
+                            if (password_verify ($password, $password_enkript)) {
+                                session_start();
+                                $_SESSION['status']     = "login";
+                                $_SESSION['nama']       = $nama;
+                                $_SESSION['jabatan']    = $jabatan;
+                                ?>
+                                <script>
+                                    alert('Anda Berhasil Login');
+                                    window.location.href='dashboard.php';
+                                </script>
+                                <?php        
+                            }               
+                        } 
+                        else
+                        {
                             ?>
                             <script>
                             alert('Anda Gagal Login');
@@ -47,7 +58,7 @@
                     <div class="container">
                         <div>
                         <center>
-                        <h1>PERPUSTAKAAN</h1>
+                        <h1>SI Perpustakaan TB</h1>
                         </center>
                         <form action="" method="POST">
                             <div class="form-group">

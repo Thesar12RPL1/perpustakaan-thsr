@@ -1,7 +1,11 @@
 <?php
 session_start();
-if ($_SESSION['jabatan']=="petugas") {
+if (isset($_SESSION['status'])) {
     include('koneksi.php');
+    $nama = $_SESSION['nama'];
+    $jabatan = $_SESSION['jabatan'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +46,20 @@ if ($_SESSION['jabatan']=="petugas") {
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/perpustakaan/dashboard.php">Home</a>
                             </li>
+<!-- ----------------- -->
+                            <?php   
+                                if ($jabatan == "Kepala Perpustakaan"){
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="?page=petugas">petugas</a>
+                            </li>
+                            <?php
+                                }
+                            ?>
+<!-- ---------------- -->
+
+
+
                             <li class="nav-item">
                                 <a class="nav-link" href="?page=anggota">Anggota</a>
                             </li>
@@ -88,20 +106,35 @@ if ($_SESSION['jabatan']=="petugas") {
                         include('anggota-edit.php');
                     }elseif($_GET['page']=="anggota-edit-proses"){
                         include('anggota-edit-proses.php');
+                        // -------------
+                    }elseif($_GET['page']=="petugas"){
+                        include('petugas.php');
+                    }elseif($_GET['page']=="petugas-delete"){
+                        include('petugas-delete.php');
+                    }elseif($_GET['page']=="petugas-insert"){
+                        include('petugas-insert.php');
+                    }elseif($_GET['page']=="petugas-edit"){
+                        include('petugas-edit.php');
+                    }elseif($_GET['page']=="petugas-edit-proses"){
+                        include('petugas-edit-proses.php');
+
                     }elseif($_GET['page']=="logout"){
                         include('logout.php');
+                        
                     }else{
                         echo "<h1>Halaman yang anda cari tidak ditemukan!";
                     }
                 }else{
-                    echo "<br><br><center><h1>Selamat Datang Administrator</h1></center><br><br>";
+                    echo "<br><br><center><h1>Selamat Datang ".$nama."</h1></center><br><br>";
+                    echo "<center><h1>".$jabatan."</h1></center><br><br>";
                 }
+
                 ?>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <center>@ THESAR ADHETYA NUGRAHA 2021</center>
+                <center>@ YUSRAN 2021</center>
             </div>
         </div>
     </div>
@@ -118,4 +151,5 @@ else
     </script>
     <?php
 }
+
 ?>

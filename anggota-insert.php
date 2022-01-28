@@ -15,18 +15,18 @@ VALUES('','$nis','$nama','$jk','$tpt_lahir','$tgl_lahir','$kelas','$jurusan','$t
     if($query_insert)
     {
         ?>
-            <div class="alert alert-success">
-                Data Berhasil Disimpan
-            </div>
-        <?php
-        header('refresh:3; URL=http://localhost/perpustakaan/dashboard.php?page=anggota');
-    }
+            <script>
+            alert('data di simpan');
+            window.location.href='?page=anggota';
+        </script>
+        }
     else
     {
         ?>
-            <div class="alert alert-danger">
-                Data GAGAL Disimpan !!!!!!!!!
-            </div>
+        <script>
+            alert('data di gagal simpan');
+            window.location.href='?page=angota';
+        </script>
         <?php
     }
 }
